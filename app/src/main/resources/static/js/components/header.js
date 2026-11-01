@@ -1,5 +1,3 @@
-import { openModal } from "./modals.js";
-
 function renderHeader() {
     const headerDiv = document.getElementById("header");
 
@@ -108,18 +106,6 @@ function attachHeaderButtonListeners() {
             element.addEventListener("click", handler);
         }
     }
-
-    onClick("adminLogin", () => {
-        openModal("adminLogin");
-    });
-
-    onClick("doctorLogin", () => {
-        openModal("doctorLogin");
-    });
-
-    onClick("addDocBtn", () => {
-        openModal("addDoctor");
-    });
 
     onClick("doctorHome", () => {
         selectRole("doctor");
