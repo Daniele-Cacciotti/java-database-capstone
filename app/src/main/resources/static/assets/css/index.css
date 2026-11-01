@@ -1,53 +1,106 @@
-/* this is the style sheet file for index.htlm  */
+/* Reset e impostazioni generali */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* 
-**Global Reset (`*`)**
+html,
+body {
+    min-height: 100%;
+    font-family: "Roboto", Arial, sans-serif;
+}
 
-* Remove all default margin and padding.
-* Use `border-box` for sizing to include padding and border in element size.
+body {
+    background-color: #f4f4f4;
+}
 
-**Base (`html, body`)**
+/* Header, contenuto e footer disposti verticalmente */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-* Set height to 100% for full viewport layout.
-* Use the `'Roboto'` sans-serif font for modern, clean typography.
+/* Area di selezione del ruolo */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
 
-**Layout Wrapper (`.wrapper`)**
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.75),
+            rgba(255, 255, 255, 0.75)
+        ),
+        url("../images/defineRole/index.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-* Use a vertical flexbox layout.
-* Ensure the wrapper covers at least the full height of the screen (`min-height: 100vh`).
+.main-content h2 {
+    margin-bottom: 50px;
+    color: #003e3e;
+    font-family: "Alegreya", "Roboto", sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+}
 
-**Heading (`h2`)**
+/* Pulsanti */
+button {
+    width: 200px;
+    max-width: 100%;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
 
-* Set a large font size (`48px`) for prominence.
-* Add a bottom margin of `50px` for spacing.
-* Use a dark teal color (`#003e3e`).
-* Make the font bold and use a blended font stack (`'Alegreya', 'Roboto', sans-serif`) for elegant styling.
+    background-color: #015c5d;
+    color: #fff;
+    font: inherit;
+    font-size: 16px;
+    cursor: pointer;
 
-**Main Section (`.main-content`)**
+    transition: background-color 0.2s ease;
+}
 
-* Allow the section to grow to fill space with `flex-grow: 1`.
-* Add `40px` of internal padding.
-* Center content both horizontally and vertically using `justify-content` and `align-items`.
-* Display items in a column direction.
-* Center all text.
-* Apply a full-screen background image with:
+button:hover {
+    background-color: #a62b1f;
+}
 
-  * `cover` size
-  * `center` positioning
-  * no repeat
-  * `fixed` attachment to keep image still during scroll
+button:focus-visible {
+    outline: 3px solid #003e3e;
+    outline-offset: 3px;
+}
 
-**Buttons (`button`)**
+.dashboard-btn {
+    background-color: #015c5d;
+}
 
-* Style with a teal green background (`#015c5d`) and white text.
-* Remove borders and round the corners (`12px`).
-* Use `10px 20px` padding and set width to `200px`.
-* Add a top margin of `10px` for spacing.
-* Enable pointer cursor and readable font size (`16px`).
-* On hover, change background color to bold red (`#A62B1F`).
+.dashboard-btn:hover {
+    background-color: #003e3e;
+}
 
-**Dashboard Buttons (`.dashboard-btn`)**
+/* Limita la larghezza del popup sugli schermi piccoli */
+.modal-content {
+    max-width: calc(100% - 32px);
+}
 
-* Use the same base green background (`#015c5d`) as the default button.
-* On hover, darken the background to deep teal (`#003e3e`) for visual feedback.
- */
+/* Adattamento per smartphone */
+@media (max-width: 600px) {
+    .main-content {
+        padding: 30px 20px;
+        background-attachment: scroll;
+    }
+
+    .main-content h2 {
+        margin-bottom: 30px;
+        font-size: 34px;
+    }
+}
