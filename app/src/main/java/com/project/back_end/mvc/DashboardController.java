@@ -17,7 +17,7 @@ public class DashboardController {
 
     @GetMapping("/adminDashboard/{token}")
     public String adminDashboard(@PathVariable("token") String token) {
-        if (service.validateToken(token, "admin").isEmpty()) {
+        if (service.validateToken(token, "admin").getStatusCode().is2xxSuccessful()) {
             return "admin/adminDashboard";
         }
 
@@ -26,7 +26,7 @@ public class DashboardController {
 
     @GetMapping("/doctorDashboard/{token}")
     public String doctorDashboard(@PathVariable("token") String token) {
-        if (service.validateToken(token, "doctor").isEmpty()) {
+        if (service.validateToken(token, "doctor").getStatusCode().is2xxSuccessful()) {
             return "doctor/doctorDashboard";
         }
 
