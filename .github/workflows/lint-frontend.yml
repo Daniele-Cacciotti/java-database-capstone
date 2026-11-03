@@ -1,0 +1,41 @@
+name: Lint Frontend
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - name: Install linters
+        run: npm install --global htmlhint@1 stylelint@16 eslint@9
+      - name: Configure CSS and JavaScript linters
+        run: |
+          cat > stylelint.config.mjs <<'EOF'
+          export default {
+            rules: { "block-no-empty": true, "color-no-invalid-hex": true }
+          };
+          EOF
+          cat > eslint.config.mjs <<'EOF'
+          export default [{
+            rules: {
+              "no-debugger": "error",
+              "no-dupe-keys": "error",
+              "no-unreachable": "error"
+            }
+          }];
+          EOF
+      - name: Lint HTML
+        continue-on-error: true
+        run: htmlhint "app/src/main/resources/{static,templates}/**/*.html"
+      - name: Lint CSS
+        continue-on-error: true
+        run: stylelint "app/src/main/resources/static/assets/css/**/*.css"
+      - name: Lint JavaScript
+        continue-on-error: true
+        run: eslint "app/src/main/resources/static/js/**/*.js"

@@ -1,0 +1,23 @@
+name: Lint Java Backend
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-java:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Download Checkstyle
+        run: |
+          curl --fail --silent --show-error --location --retry 3 \
+            --output "$RUNNER_TEMP/checkstyle.jar" \
+            https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.12.1/checkstyle-10.12.1-all.jar
+      - name: Run Checkstyle
+        continue-on-error: true
+        run: java -jar "$RUNNER_TEMP/checkstyle.jar" -c /google_checks.xml app/src/main/java/com/project/back_end
